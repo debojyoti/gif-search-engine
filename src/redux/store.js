@@ -3,11 +3,10 @@ import hardSet from "redux-persist/es/stateReconciler/hardSet";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from 'redux-persist/lib/storage'
 import thunk from "redux-thunk";
-import { loaderDataReducer, userDataReducer } from './reducers';
+import { settingsDataReducer } from "./reducers";
 
 const rootReducer = combineReducers({
-    userData: userDataReducer,
-    loaderData: loaderDataReducer,
+    settingsData: settingsDataReducer
 })
 
 const persistConfig = {
@@ -15,7 +14,7 @@ const persistConfig = {
     storage,
     keyPrefix: "",
     stateReconciler: hardSet,
-    blacklist: ['loaderData']
+    blacklist: []
 }
 
 const pReducer = persistReducer(persistConfig, rootReducer);
