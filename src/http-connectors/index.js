@@ -23,7 +23,8 @@ const structureQueryParams = params => {
 export const makeGetRequest = async (
   url,
   attachToken = false,
-  params = null
+  params = null,
+  additionalHeaderParams
 ) => {
   let queryString = "";
   if (params) {
@@ -43,31 +44,37 @@ export const makeGetRequest = async (
       console.log(e);
     }
   }
+  if (additionalHeaderParams && Object.keys(additionalHeaderParams).length) {
+    headers = { ...headers, ...additionalHeaderParams };
+  }
   return new Promise((resolve, reject) => {
     try {
       fetch(url + queryString, {
         method: "GET",
         headers: headers
       })
-        .then(res => {
+        .then(async res => {
           handleErrorIfAvailable(res);
-          return res.json()
+          if (res.status.toString()[0] !== "2") {
+            try {
+              const parsedBody = await res.json();
+              reject({ status: res.status, body: parsedBody });
+              return;
+            } catch (err) {
+              reject({ status: res.status, body: null });
+              return;
+            }
+          }
+          return res.json();
         })
         .then(jsonResponse => {
-
-          if (jsonResponse.error === false) {
-            resolve(jsonResponse);
-          } else {
-            console.log(jsonResponse);
-            reject(jsonResponse);
-          }
+          resolve(jsonResponse);
         })
         .catch(e => {
           console.log("XHR GET Error: ", e);
           reject(e);
         });
     } catch (e) {
-
       console.log(e);
       reject();
     }
@@ -77,7 +84,8 @@ export const makeGetRequest = async (
 export const makePostRequest = async (
   url,
   attachToken = false,
-  params = {}
+  params = {},
+  additionalHeaderParams
 ) => {
   let headers = {
     Accept: "application/json",
@@ -93,6 +101,9 @@ export const makePostRequest = async (
       console.log("Error fetching auth token: ", e);
     }
   }
+  if (additionalHeaderParams && Object.keys(additionalHeaderParams).length) {
+    headers = { ...headers, ...additionalHeaderParams };
+  }
   return new Promise((resolve, reject) => {
     try {
       fetch(url, {
@@ -101,9 +112,19 @@ export const makePostRequest = async (
         body: JSON.stringify(params)
       })
         .then(
-          res => {
+          async res => {
             handleErrorIfAvailable(res);
-            return res.json()
+            if (res.status.toString()[0] !== "2") {
+              try {
+                const parsedBody = await res.json();
+                reject({ status: res.status, body: parsedBody });
+                return;
+              } catch (err) {
+                reject({ status: res.status, body: null });
+                return;
+              }
+            }
+            return res.json();
           },
           error => {
             reject(error);
@@ -111,11 +132,7 @@ export const makePostRequest = async (
         )
         .then(
           jsonResponse => {
-            if (jsonResponse.error === false) {
-              resolve(jsonResponse);
-            } else {
-              reject(jsonResponse);
-            }
+            resolve(jsonResponse);
           },
           error => {
             reject(error);
@@ -131,11 +148,7 @@ export const makePostRequest = async (
   });
 };
 
-export const makePutRequest = async (
-  url,
-  attachToken = false,
-  params = {}
-) => {
+export const makePutRequest = async (url, attachToken = false, params = {}, additionalHeaderParams) => {
   let headers = {
     Accept: "application/json",
     "Content-Type": "application/json"
@@ -150,6 +163,9 @@ export const makePutRequest = async (
       console.log("Error fetching auth token: ", e);
     }
   }
+  if (additionalHeaderParams && Object.keys(additionalHeaderParams).length) {
+    headers = { ...headers, ...additionalHeaderParams };
+  }
   return new Promise((resolve, reject) => {
     try {
       fetch(url, {
@@ -158,9 +174,19 @@ export const makePutRequest = async (
         body: JSON.stringify(params)
       })
         .then(
-          res => {
+          async res => {
             handleErrorIfAvailable(res);
-            return res.json()
+            if (res.status.toString()[0] !== "2") {
+              try {
+                const parsedBody = await res.json();
+                reject({ status: res.status, body: parsedBody });
+                return;
+              } catch (err) {
+                reject({ status: res.status, body: null });
+                return;
+              }
+            }
+            return res.json();
           },
           error => {
             reject(error);
@@ -168,12 +194,7 @@ export const makePutRequest = async (
         )
         .then(
           jsonResponse => {
-            if (jsonResponse.error === false) {
-              resolve(jsonResponse);
-            } else {
-              console.log(jsonResponse);
-              reject(jsonResponse);
-            }
+            resolve(jsonResponse);
           },
           error => {
             reject(error);
@@ -192,7 +213,8 @@ export const makePutRequest = async (
 export const makeDeleteRequest = async (
   url,
   attachToken = false,
-  params = {}
+  params = {},
+  additionalHeaderParams
 ) => {
   let headers = {
     Accept: "application/json",
@@ -208,6 +230,9 @@ export const makeDeleteRequest = async (
       console.log("Error fetching auth token: ", e);
     }
   }
+  if (additionalHeaderParams && Object.keys(additionalHeaderParams).length) {
+    headers = { ...headers, ...additionalHeaderParams };
+  }
   return new Promise((resolve, reject) => {
     try {
       fetch(url, {
@@ -216,9 +241,19 @@ export const makeDeleteRequest = async (
         body: JSON.stringify(params)
       })
         .then(
-          res => {
+          async res => {
             handleErrorIfAvailable(res);
-            return res.json()
+            if (res.status.toString()[0] !== "2") {
+              try {
+                const parsedBody = await res.json();
+                reject({ status: res.status, body: parsedBody });
+                return;
+              } catch (err) {
+                reject({ status: res.status, body: null });
+                return;
+              }
+            }
+            return res.json();
           },
           error => {
             reject(error);
@@ -226,12 +261,7 @@ export const makeDeleteRequest = async (
         )
         .then(
           jsonResponse => {
-            if (jsonResponse.error === false) {
-              resolve(jsonResponse);
-            } else {
-              console.log(jsonResponse);
-              reject(jsonResponse);
-            }
+            resolve(jsonResponse);
           },
           error => {
             reject(error);
@@ -247,14 +277,8 @@ export const makeDeleteRequest = async (
   });
 };
 
-export const uploadFile = async (
-  url,
-  attachToken = false,
-  formData
-) => {
-  let headers = {
-    
-  };
+export const uploadFile = async (url, attachToken = false, formData) => {
+  let headers = {};
   if (attachToken) {
     try {
       const authToken = await getToken();
@@ -273,9 +297,19 @@ export const uploadFile = async (
         body: formData
       })
         .then(
-          res => {
+          async res => {
             handleErrorIfAvailable(res);
-            return res.json()
+            if (res.status.toString()[0] !== "2") {
+              try {
+                const parsedBody = await res.json();
+                reject({ status: res.status, body: parsedBody });
+                return;
+              } catch (err) {
+                reject({ status: res.status, body: null });
+                return;
+              }
+            }
+            return res.json();
           },
           error => {
             reject(error);
