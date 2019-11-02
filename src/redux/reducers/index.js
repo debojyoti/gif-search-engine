@@ -1,2 +1,1 @@
-export { loaderDataReducer } from "./loader-data";
-export { userDataReducer } from "./user-data";
+export { settingsDataReducer } from "./settings-data";

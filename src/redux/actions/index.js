@@ -1,5 +1,1 @@
-export { UPDATE_USER_DATA } from './action-types';
-export { CLEAR_USER_DATA } from './action-types';
-
-export { SHOW_LOADER } from './action-types';
-export { HIDE_LOADER } from './action-types';
+export { SET_CURRENT_THEME, TOGGLE_AUTOMATIC_THEME_UPDATE } from './action-types';
