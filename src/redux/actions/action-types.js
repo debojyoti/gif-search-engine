@@ -1,0 +1,5 @@
+export const UPDATE_USER_DATA = 'UPDATE_USER_DATA';
+export const CLEAR_USER_DATA = 'CLEAR_USER_DATA';
+
+export const SHOW_LOADER = 'SHOW_LOADER';
+export const HIDE_LOADER = 'HIDE_LOADER';
