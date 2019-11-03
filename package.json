@@ -5,7 +5,9 @@
   "dependencies": {
     "clone-deep": "^4.0.1",
     "react": "^16.10.2",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.10.2",
+    "react-infinite-scroller": "^1.2.4",
     "react-loader-spinner": "^3.1.4",
     "react-redux": "^7.1.1",
     "react-router-dom": "^5.1.2",
