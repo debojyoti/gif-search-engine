@@ -20,17 +20,17 @@ class FeaturedPage extends Component {
   _initialLoad = () => {
     return new Promise(async (resolve, reject) => {
       try {
-        await this._activateLoader(true);
+        await this._toggleLoader(true);
         const gifResponse = await fetchFeaturedGifs(GIF_LIMIT_PER_LOAD, 0);
         await this._updateStateWithNewGifs(gifResponse);
-        await this._activateLoader(false);
+        await this._toggleLoader(false);
       } catch (err) {
         showToast("Server error", "error");
       }
     });
   };
 
-  _activateLoader = shouldActivate => {
+  _toggleLoader = shouldActivate => {
     return new Promise((resolve, reject) => {
       this.setState({ isLoaderActive: shouldActivate }, () => {
         resolve();
