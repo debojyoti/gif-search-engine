@@ -1,13 +1,12 @@
-import { BASE_URL } from '../config/index';
-import { makePostRequest } from '../http-connectors';
+import { BASE_URL } from "../config/index";
+import { makePostRequest } from "../http-connectors";
 
-export const login = loginData => {
+export const fetchFeaturedGifs = (limit = 25, offset = 0) => {
   return new Promise((resolve, reject) => {
-    makePostRequest(
-      BASE_URL + "5da203dc2f00007900f418fa",
-      false,
-      loginData
-    )
+    makePostRequest(BASE_URL + "/trending", true, {
+      limit,
+      offset
+    })
       .then(res => {
         resolve(res);
       })
