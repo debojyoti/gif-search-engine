@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-import "../assets/style.css";
 import Header from "../components/header";
 import SettingsPannel from "./settings-panel";
 import SearchPage from "../pages/search-page";
 import FeaturedPage from "../pages/featured-gifs-page";
-import IdlePage from "../pages/idle-page";
 import { connect } from "react-redux";
 import { AUTO_THEME_TRIGGER_POINTS } from "../config";
 import { updateSettings } from "../redux/actions/settings-data";
@@ -13,7 +11,8 @@ import { updateSettings } from "../redux/actions/settings-data";
 class Main extends Component {
   state = {
     isDarkModeEnabled: true,
-    themeUpdateTimer: null
+    themeUpdateTimer: null,
+    searchedTerm: null
   };
 
   componentDidMount() {
@@ -195,33 +194,35 @@ class Main extends Component {
     );
   };
 
+  _newSearchRequest = searchedTerm => {
+    this.setState({searchedTerm}, () => {
+      this.props.history.replace("/search");
+    });
+  }
+
   render() {
-    const { isSettingsVisible } = this.state;
+    const { isSettingsVisible, searchedTerm } = this.state;
     return (
       <React.Fragment>
         <div id="app-wrapper">
           <div id={this._getThemeId()}>
             <Header
               makeSettingsPannelVisible={this._makeSettingsPannelVisible}
+              newSearchRequest={this._newSearchRequest}
             />
             <div id="app-body">
               <Switch>
                 <Route
                   exact
                   path={`${this.props.match.path}/search`}
-                  render={() => <SearchPage {...this.props} />}
+                  render={() => <SearchPage {...this.props} searchedTerm={searchedTerm}/>}
                 />
                 <Route
                   exact
                   path={`${this.props.match.path}/featured`}
                   render={() => <FeaturedPage {...this.props} />}
                 />
-                <Route
-                  exact
-                  path={`/`}
-                  render={() => <IdlePage {...this.props} />}
-                />
-                <Route exact path="*" render={() => <Redirect to="/" />} />
+                <Route exact path="*" render={() => <Redirect to="/search" />} />
               </Switch>
             </div>
             <SettingsPannel
