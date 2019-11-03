@@ -1,9 +1,10 @@
 import { BASE_URL } from "../config/index";
-import { makePostRequest } from "../http-connectors";
+import { makeGetRequest } from "../http-connectors";
+import { getToken } from "../token-interceptor";
 
 export const fetchFeaturedGifs = (limit = 25, offset = 0) => {
   return new Promise((resolve, reject) => {
-    makePostRequest(BASE_URL + "/trending", true, {
+    makeGetRequest(BASE_URL + "/trending", true, {
       limit,
       offset
     })

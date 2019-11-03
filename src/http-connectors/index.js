@@ -13,7 +13,7 @@ const structureQueryParams = params => {
   const keys = Object.keys(params);
   keys.forEach((key, index) => {
     queryStrings += key + "=" + params[key];
-    if (params[keys[index + 1]]) {
+    if (params[keys[index + 1]] !== undefined) {
       queryStrings += "&";
     }
   });
@@ -24,22 +24,20 @@ export const makeGetRequest = async (
   url,
   attachAPIKey = false,
   params = null,
-  additionalHeaderParams
+  additionalHeaderParams = null
 ) => {
-  let queryString = "";
-  if (params) {
-    queryString = structureQueryParams(params);
+  let finalParams = {};
+  if (attachAPIKey) {
+    finalParams = { api_key: getToken() };  
   }
+  if (params) {
+    finalParams = { ...finalParams, ...params };
+  }
+  const queryString = structureQueryParams(finalParams);
   let headers = {
-    Accept: "application/json",
+    "Accept": "application/json",
     "Content-Type": "application/json"
   };
-  if (attachAPIKey) {
-    const api_key = getToken();
-    if (api_key) {
-      headers["api_key"] = api_key;
-    }
-  }
   if (additionalHeaderParams && Object.keys(additionalHeaderParams).length) {
     headers = { ...headers, ...additionalHeaderParams };
   }
