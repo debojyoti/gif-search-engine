@@ -17,3 +17,20 @@ export const fetchFeaturedGifs = (limit = 25, offset = 0) => {
       });
   });
 };
+
+export const searchGifs = (searchedString, limit = 25, offset = 0) => {
+  return new Promise((resolve, reject) => {
+    makeGetRequest(BASE_URL + "/search", true, {
+      limit,
+      offset,
+      q: searchedString
+    })
+      .then(res => {
+        resolve(res);
+      })
+      .catch(e => {
+        console.log("API call error: ", e);
+        reject(e);
+      });
+  });
+};
