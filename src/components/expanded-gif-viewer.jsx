@@ -44,8 +44,7 @@ class ExpandedGifViewer extends Component {
                   <i className="fa fa-code" aria-hidden="true"></i>&nbsp; GIF
                   Embed Code
                 </p>
-                <textarea name="" id="" rows="6" disabled>
-                  <iframe
+                <textarea name="" id="" rows="6" disabled defaultValue='<iframe
                     src="https://giphy.com/embed/QBjm4TkNLtxJDhlR8v"
                     width="480"
                     height="480"
@@ -57,7 +56,7 @@ class ExpandedGifViewer extends Component {
                     <a href="https://giphy.com/gifs/BTSport-soccer-premier-league-epl-QBjm4TkNLtxJDhlR8v">
                       via GIPHY
                     </a>
-                  </p>
+                  </p>' >
                 </textarea>
               </div>
             </div>
