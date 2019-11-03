@@ -13,13 +13,30 @@ class SettingsPannel extends Component {
     }
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this._syncSettingsWithStore();
     this._registerEvents();  
   }
 
-  componentWillReceiveProps(nextProps) {
-    this._toggleSettingsPannel(nextProps);
+  static getDerivedStateFromProps(nextProps, prevState) {
+    let newState = {};
+    if (
+      nextProps.isSettingsVisible !==
+      prevState.isSettingsVisible
+    ) {
+      newState = { ...newState, isSettingsVisible: nextProps.isSettingsVisible };
+    } 
+    if (
+      JSON.stringify(nextProps.settingsData) !==
+      JSON.stringify(prevState.settings)
+    ) {
+      newState =  { ...newState, settings: nextProps.settingsData };
+    }
+    if (Object.keys(newState).length) {
+      return newState;
+    } else {
+      return null; // Triggers no change in the state
+    }
   }
 
   componentWillUnmount() {
@@ -33,12 +50,6 @@ class SettingsPannel extends Component {
   _handleClick = e => {
     if (this.node && !this.node.contains(e.target)) {
       this.props.onDismiss();
-    }
-  };
-
-  _toggleSettingsPannel = props => {
-    if (props.isSettingsVisible !== this.state.isSettingsVisible) {
-      this.setState({ isSettingsVisible: props.isSettingsVisible });
     }
   };
 
@@ -86,6 +97,7 @@ class SettingsPannel extends Component {
                 type="checkbox"
                 checked={settings.isDarkModeEnabled}
                 onChange={e => this._toggleSettings("isDarkModeEnabled")}
+                disabled={settings.isAutomaticThemeUpdateEnabled? true: null}
               />
               <div className="toggle-switch"></div>
               <span className="toggle-label"></span>
