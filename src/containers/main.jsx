@@ -8,9 +8,8 @@ import FeaturedPage from "../pages/featured-gifs-page";
 import IdlePage from "../pages/idle-page";
 
 class Main extends Component {
-  state = {
-    hello: 1
-  };
+  state = {};
+
   componentDidMount() {}
 
   _makeSettingsPannelVisible = () => {
@@ -50,7 +49,7 @@ class Main extends Component {
                 />
                 <Route
                   exact
-                  path={`${this.props.match.path}/`}
+                  path={`/`}
                   render={() => <IdlePage {...this.props} />}
                 />
                 <Route exact path="*" render={() => <Redirect to="/" />} />
