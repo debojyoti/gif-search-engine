@@ -509,3 +509,16 @@
     margin: 0px;
     padding: 8px 15px 0px 15px;
   }
+
+  #light-theme #app-body #noresults-animation {
+    background-image: url("./images/no-results-light.gif"); }
+
+    #dark-theme #app-body #noresults-animation {
+      background-image: url("./images/no-results-dark.gif"); }
+
+      #app-body #loading #noresults-animation {
+        width: 300px;
+        height: 100px;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat; }

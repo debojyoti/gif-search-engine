@@ -3,8 +3,8 @@ import ExpandedGifViewer from "./expanded-gif-viewer";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { showToast } from "../helper-methods/index";
 import SearchInProgress from "./search-in-progress";
-import InfiniteScroll from 'react-infinite-scroller';
-import { connect } from 'react-redux';
+import InfiniteScroll from "react-infinite-scroller";
+import { connect } from "react-redux";
 import { updateSettings } from "../redux/actions/settings-data";
 
 class GridResultViewer extends Component {
@@ -12,8 +12,11 @@ class GridResultViewer extends Component {
 
   _toggleAutoPlay = () => {
     const { settingsData } = this.props;
-    this.props.updateSettings({ ...settingsData, isAutoPlayEnabled: !settingsData.isAutoPlayEnabled });
-  }
+    this.props.updateSettings({
+      ...settingsData,
+      isAutoPlayEnabled: !settingsData.isAutoPlayEnabled
+    });
+  };
 
   _showCopySuccessMessage = () => {
     showToast("Copied to your clipboard!", "success");
@@ -22,17 +25,24 @@ class GridResultViewer extends Component {
   _formatGifTitle = title => {
     if (title && title.length) {
       if (title.length > 30) {
-        return title.substring(0,29) + "...";
+        return title.substring(0, 29) + "...";
       } else {
         return title;
       }
     } else {
-      return <span>&nbsp;</span>
+      return <span>&nbsp;</span>;
     }
-  }
+  };
 
   render() {
-    const { gifs, pagination, canLoadMore, loadMore, settingsData } = this.props;
+    const {
+      gifs,
+      pagination,
+      canLoadMore,
+      loadMore,
+      settingsData,
+      isLoaderActive
+    } = this.props;
     return (
       <React.Fragment>
         <div id="result-grid-wrapper">
@@ -46,39 +56,41 @@ class GridResultViewer extends Component {
                   : 0}
               </h5>
               <div>
-                Autoplay &nbsp; <label className="toggle" style={{zIndex:9}}>
-              <input
-                className="toggle-checkbox"
-                type="checkbox"
-                checked={settingsData.isAutoPlayEnabled}
-                onChange={e => this._toggleAutoPlay()}
-              />
-              <div className="toggle-switch"></div>
-              <span className="toggle-label"></span>
-            </label> 
+                Autoplay &nbsp;{" "}
+                <label className="toggle" style={{ zIndex: 9 }}>
+                  <input
+                    className="toggle-checkbox"
+                    type="checkbox"
+                    checked={settingsData.isAutoPlayEnabled}
+                    onChange={e => this._toggleAutoPlay()}
+                  />
+                  <div className="toggle-switch"></div>
+                  <span className="toggle-label"></span>
+                </label>
               </div>
             </div>
-
-            <InfiniteScroll
-              pageStart={0}
-              loadMore={loadMore}
-              hasMore={canLoadMore}
-              threshold={250}
-              loader={<SearchInProgress isVisible={true} key={0} />}
-            >
-              <div id="gif-result-grid" className="fRow aIC jCC">
-                {gifs && gifs.length
-                  ? gifs.map((gif, gifIndex) => (
-                      <div className="gif-result" key={gifIndex}>
-                        <div
-                          className="gif-thumbnail"
-                          style={{
-                            backgroundImage: settingsData.isAutoPlayEnabled? `url(${gif.images.downsized.url})`: `url(${gif.images.downsized_still.url})`
-                          }}
-                        ></div>
-                        <div className="gif-quick-actions  fColumn">
-                          <p>{this._formatGifTitle(gif.title)}</p>
-                          <div className="fRow aIC jCSB">
+            {gifs && gifs.length ? (
+              <InfiniteScroll
+                pageStart={0}
+                loadMore={loadMore}
+                hasMore={canLoadMore}
+                threshold={250}
+                loader={<SearchInProgress isVisible={true} key={0} />}
+              >
+                <div id="gif-result-grid" className="fRow aIC jCC">
+                  {gifs.map((gif, gifIndex) => (
+                    <div className="gif-result" key={gifIndex}>
+                      <div
+                        className="gif-thumbnail"
+                        style={{
+                          backgroundImage: settingsData.isAutoPlayEnabled
+                            ? `url(${gif.images.downsized.url})`
+                            : `url(${gif.images.downsized_still.url})`
+                        }}
+                      ></div>
+                      <div className="gif-quick-actions  fColumn">
+                        <p>{this._formatGifTitle(gif.title)}</p>
+                        <div className="fRow aIC jCSB">
                           <div className="social-links fRow aIC jCE">
                             <a
                               href={`https://giphy.com/login/twitter?next=https://giphy.com/login/twitter/finalize?next=${gif.url}`}
@@ -114,14 +126,17 @@ class GridResultViewer extends Component {
                             </div>
                           </CopyToClipboard>
                         </div>
-                        </div>
                       </div>
-                    ))
-                  : null}
+                    </div>
+                  ))}
+                </div>
+              </InfiniteScroll>
+            ) : !isLoaderActive ? (
+              <div id="loading" className="fColumn jCC aIC">
+                <div id="noresults-animation"></div>
+                <h4>No Results Found :(</h4>
               </div>
-            </InfiniteScroll>
-
-            {/*  */}
+            ) : null}
           </div>
         </div>
 
@@ -130,7 +145,6 @@ class GridResultViewer extends Component {
     );
   }
 }
-
 
 const mapStateToProps = state => {
   return {

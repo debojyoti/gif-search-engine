@@ -84,6 +84,7 @@ class FeaturedPage extends Component {
           pagination={pagination}
           canLoadMore={this._checkIfCanLoadMore()}
           loadMore={ this._loadMoreGifsIfAvailable } 
+          isLoaderActive={isLoaderActive}
         />
         <SearchInProgress isVisible={isLoaderActive} />
       </div>
