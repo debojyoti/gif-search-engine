@@ -1,4 +1,5 @@
 import { store } from "../redux/store";
+import { GIPHY_API_KEY } from "../config";
 
 /**
  *
@@ -6,18 +7,5 @@ import { store } from "../redux/store";
  *
  */
 export const getToken = () => {
-  return new Promise((resolve, reject) => {
-    let token = null;
-    const oldState = store.getState();
-    const state = { ...oldState };
-    // Try to get token from state
-    if (
-      state &&
-      state.userData &&
-      state.userData["token"]
-    ) {
-      token = state.userData["token"];
-    }
-    resolve(token);
-  });
+  return GIPHY_API_KEY;
 };

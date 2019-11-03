@@ -7,7 +7,7 @@ import SearchPage from "../pages/search-page";
 import FeaturedPage from "../pages/featured-gifs-page";
 import IdlePage from "../pages/idle-page";
 import { connect } from "react-redux";
-import { themeTriggers } from "../config";
+import { AUTO_THEME_TRIGGER_POINTS } from "../config";
 import { updateSettings } from "../redux/actions/settings-data";
 
 class Main extends Component {
@@ -155,13 +155,13 @@ class Main extends Component {
   _getCurrentMode = () => {
     const currentHour = new Date().getHours();
     if (
-      currentHour >= themeTriggers.evening ||
-      currentHour < themeTriggers.morning
+      currentHour >= AUTO_THEME_TRIGGER_POINTS.evening ||
+      currentHour < AUTO_THEME_TRIGGER_POINTS.morning
     ) {
       return "evening";
     } else if (
-      currentHour >= themeTriggers.morning &&
-      currentHour < themeTriggers.evening
+      currentHour >= AUTO_THEME_TRIGGER_POINTS.morning &&
+      currentHour < AUTO_THEME_TRIGGER_POINTS.evening
     ) {
       return "morning";
     }
@@ -172,7 +172,7 @@ class Main extends Component {
     let upcomingMonth;
     let upcomingYear;
     const upcomingHours = new Date().getHours();
-    if (upcomingHours > themeTriggers[upComingMode]) {
+    if (upcomingHours > AUTO_THEME_TRIGGER_POINTS[upComingMode]) {
       // Change will occur next day
       const tomorrow = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
       upcomingDate = tomorrow.getDate();
@@ -190,7 +190,7 @@ class Main extends Component {
         upcomingYear,
         upcomingMonth,
         upcomingDate,
-        themeTriggers[upComingMode]
+        AUTO_THEME_TRIGGER_POINTS[upComingMode]
       ) - new Date()
     );
   };
