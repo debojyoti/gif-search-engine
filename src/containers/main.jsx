@@ -6,11 +6,33 @@ import SettingsPannel from "./settings-panel";
 import SearchPage from "../pages/search-page";
 import FeaturedPage from "../pages/featured-gifs-page";
 import IdlePage from "../pages/idle-page";
+import { connect } from "react-redux";
 
 class Main extends Component {
-  state = {};
+  state = {
+    isDarkModeEnabled: true
+  };
+
+  componentWillMount() {
+    this._setTheme();
+  }
 
   componentDidMount() {}
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (
+      nextProps.settingsData.isDarkModeEnabled !==
+      prevState.isDarkModeEnabled
+    ) {
+      return { isDarkModeEnabled: nextProps.settingsData.isDarkModeEnabled };
+    } else return null; // Triggers no change in the state
+  }
+
+  _setTheme = () => {
+    this.setState({
+      isDarkModeEnabled: this.props.settingsData.isDarkModeEnabled
+    });
+  };
 
   _makeSettingsPannelVisible = () => {
     if (!this.state.isSettingsVisible) {
@@ -26,12 +48,17 @@ class Main extends Component {
     });
   };
 
+  _getThemeId = () => {
+    const { isDarkModeEnabled } = this.state;
+    return isDarkModeEnabled? "dark-theme" : "light-theme"; 
+  }
+
   render() {
     const { isSettingsVisible } = this.state;
     return (
       <React.Fragment>
         <div id="app-wrapper">
-          <div id="light-theme">
+          <div id={this._getThemeId()}>
             <Header
               makeSettingsPannelVisible={this._makeSettingsPannelVisible}
             />
@@ -66,4 +93,17 @@ class Main extends Component {
   }
 }
 
-export default Main;
+const mapStateToProps = state => {
+  return {
+    settingsData: state.settingsData
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Main);
