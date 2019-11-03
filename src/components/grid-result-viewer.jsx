@@ -19,6 +19,18 @@ class GridResultViewer extends Component {
     showToast("Copied to your clipboard!", "success");
   };
 
+  _formatGifTitle = title => {
+    if (title && title.length) {
+      if (title.length > 30) {
+        return title.substring(0,29) + "...";
+      } else {
+        return title;
+      }
+    } else {
+      return <span>&nbsp;</span>
+    }
+  }
+
   render() {
     const { gifs, pagination, canLoadMore, loadMore, settingsData } = this.props;
     return (
@@ -64,7 +76,9 @@ class GridResultViewer extends Component {
                             backgroundImage: settingsData.isAutoPlayEnabled? `url(${gif.images.downsized.url})`: `url(${gif.images.downsized_still.url})`
                           }}
                         ></div>
-                        <div className="gif-quick-actions fRow aIC jCSB">
+                        <div className="gif-quick-actions  fColumn">
+                          <p>{this._formatGifTitle(gif.title)}</p>
+                          <div className="fRow aIC jCSB">
                           <div className="social-links fRow aIC jCE">
                             <a
                               href={`https://giphy.com/login/twitter?next=https://giphy.com/login/twitter/finalize?next=${gif.url}`}
@@ -99,6 +113,7 @@ class GridResultViewer extends Component {
                               <i className="fa fa-link" aria-hidden="true"></i>
                             </div>
                           </CopyToClipboard>
+                        </div>
                         </div>
                       </div>
                     ))

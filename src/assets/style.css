@@ -395,11 +395,11 @@
         #app-body #results-wrapper #gif-result-grid .gif-result {
           margin: 15px;
           width: 250px;
-          height: 300px;
+          height: 320px;
           border-radius: 8px; }
           @media screen and (max-width: 940px) {
             #app-body #results-wrapper #gif-result-grid .gif-result {
-              height: 370px;
+              height: 390px;
               width: 300px; } }
           #app-body #results-wrapper #gif-result-grid .gif-result .gif-thumbnail {
             background-image: url("https://media.giphy.com/media/AYKv7lXcZSJig/giphy.gif");
@@ -502,4 +502,10 @@
   #header-wrapper {
     z-index: 99;
     position: fixed;
+  }
+
+  .gif-quick-actions > p {
+    font-size: 12px;
+    margin: 0px;
+    padding: 8px 15px 0px 15px;
   }
