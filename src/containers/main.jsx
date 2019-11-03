@@ -1,56 +1,65 @@
 import React, { Component } from "react";
-import Search from "../components/search";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import "../assets/style.css";
 import Header from "../components/header";
-import Footer from "../components/footer";
 import SettingsPannel from "./settings-panel";
+import SearchPage from "../pages/search-page";
+import FeaturedPage from "../pages/featured-gifs-page";
+import IdlePage from "../pages/idle-page";
 
 class Main extends Component {
   state = {
     hello: 1
   };
-  componentDidMount() {
-    console.log("this.props :", this.props);
-    // setInterval(() => {
-    //     this.setState({hello: this.state.hello+1}, () => {
-    //         this.props.history.replace('/search');
-    //     })
-    // }, 2000);
-  }
+  componentDidMount() {}
 
   _makeSettingsPannelVisible = () => {
     if (!this.state.isSettingsVisible) {
-        this.setState({
-            isSettingsVisible: true
-        })
+      this.setState({
+        isSettingsVisible: true
+      });
     }
-  }
+  };
 
-  _hideSettings  = () => {
+  _hideSettings = () => {
     this.setState({
-        isSettingsVisible: false
-    })
-  }
+      isSettingsVisible: false
+    });
+  };
 
   render() {
-      const { isSettingsVisible } = this.state;
+    const { isSettingsVisible } = this.state;
     return (
       <React.Fragment>
         <div id="app-wrapper">
           <div id="light-theme">
-            <Header makeSettingsPannelVisible={this._makeSettingsPannelVisible} />
-            <Switch>
-              <Route
-                exact
-                path="/search"
-                render={() => (
-                  <Search hello={this.state.hello} {...this.props} />
-                )}
-              />
-            </Switch>
-            <Footer />
-            <SettingsPannel isSettingsVisible={isSettingsVisible} onDismiss={this._hideSettings} />
+            <Header
+              makeSettingsPannelVisible={this._makeSettingsPannelVisible}
+            />
+            <div id="app-body">
+              <Switch>
+                <Route
+                  exact
+                  path={`${this.props.match.path}/search`}
+                  render={() => <SearchPage {...this.props} />}
+                />
+                <Route
+                  exact
+                  path={`${this.props.match.path}/featured`}
+                  render={() => <FeaturedPage {...this.props} />}
+                />
+                <Route
+                  exact
+                  path={`${this.props.match.path}/`}
+                  render={() => <IdlePage {...this.props} />}
+                />
+                <Route exact path="*" render={() => <Redirect to="/" />} />
+              </Switch>
+            </div>
+            <SettingsPannel
+              isSettingsVisible={isSettingsVisible}
+              onDismiss={this._hideSettings}
+            />
           </div>
         </div>
       </React.Fragment>
