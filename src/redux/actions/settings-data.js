@@ -1,20 +1,12 @@
 import {
-  SET_CURRENT_THEME,
-  TOGGLE_AUTOMATIC_THEME_UPDATE
+  UPDATE_SETTINGS
 } from "./action-types";
 
-export const setCurrentTheme = (theme = "LIGHT") => {
+export const updateSettings = settings => {
   return {
-    type: SET_CURRENT_THEME,
-    payload: { theme }
-  };
-};
-
-export const toggleAutomaticThemeUpdate = isAutomaticUpdateEnabled => {
-  return {
-    type: TOGGLE_AUTOMATIC_THEME_UPDATE,
+    type: UPDATE_SETTINGS,
     payload: {
-      isAutomaticUpdateEnabled
+      settings
     }
   };
 };

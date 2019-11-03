@@ -1,18 +1,33 @@
 import React, { Component } from "react";
-import AnimateHeight from "react-animate-height";
+import { updateSettings } from "../redux/actions/settings-data";
+import { connect } from "react-redux";
+import { deepClone } from "../helper-methods";
 
 class SettingsPannel extends Component {
   state = {
-    isSettingsVisible: false
+    isSettingsVisible: false,
+    settings: {
+      isDarkModeEnabled: false,
+      isAutomaticThemeUpdateEnabled: false,
+      isSearchHistoryEnabled: true
+    }
   };
 
   componentWillMount() {
-    this._toggleSettingsPannel(this.props);
-    document.addEventListener("mousedown", this._handleClick, false);
+    this._syncSettingsWithStore();
+    this._registerEvents();  
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this._toggleSettingsPannel(nextProps);
   }
 
   componentWillUnmount() {
     document.removeEventListener("mousedown", this._handleClick, false);
+  }
+
+  _registerEvents = () => {
+    document.addEventListener("mousedown", this._handleClick, false);
   }
 
   _handleClick = e => {
@@ -21,15 +36,16 @@ class SettingsPannel extends Component {
     }
   };
 
-  componentWillReceiveProps(nextProps) {
-    this._toggleSettingsPannel(nextProps);
-  }
-
   _toggleSettingsPannel = props => {
     if (props.isSettingsVisible !== this.state.isSettingsVisible) {
       this.setState({ isSettingsVisible: props.isSettingsVisible });
     }
   };
+
+  _syncSettingsWithStore = () => {
+    const { settingsData } = this.props;
+    this.setState({ settings: settingsData });
+  }
 
   _getWrapperClassName = () => {
     const { isSettingsVisible } = this.state;
@@ -40,7 +56,18 @@ class SettingsPannel extends Component {
     }
   };
 
+  _toggleSettings = settingName => {
+    const { settings } = deepClone(this.state);
+    // Update local state
+    settings[settingName] = !settings[settingName];
+    this.setState({ settings }, () => {
+      // Update in store
+      this.props.updateSettings(settings);
+    });
+  };
+
   render() {
+    const { settings } = this.state;
     return (
       <div
         id="bottom-notification-panel"
@@ -54,7 +81,12 @@ class SettingsPannel extends Component {
           <div id="theme-switch-wrapper" className="fRow jCSB aIC">
             <h4>Dark Mode</h4>
             <label className="toggle">
-              <input className="toggle-checkbox" type="checkbox" />
+              <input
+                className="toggle-checkbox"
+                type="checkbox"
+                checked={settings.isDarkModeEnabled}
+                onChange={e => this._toggleSettings("isDarkModeEnabled")}
+              />
               <div className="toggle-switch"></div>
               <span className="toggle-label"></span>
             </label>
@@ -62,7 +94,14 @@ class SettingsPannel extends Component {
           <div id="automatic-theme-switch-wrapper" className="fRow jCSB aIC">
             <h4>Automatic switch themes</h4>
             <label className="toggle">
-              <input className="toggle-checkbox" type="checkbox" />
+              <input
+                className="toggle-checkbox"
+                type="checkbox"
+                checked={settings.isAutomaticThemeUpdateEnabled}
+                onChange={e =>
+                  this._toggleSettings("isAutomaticThemeUpdateEnabled")
+                }
+              />
               <div className="toggle-switch"></div>
               <span className="toggle-label"></span>
             </label>
@@ -70,7 +109,12 @@ class SettingsPannel extends Component {
           <div id="search-history-switch-wrapper" className="fRow jCSB aIC">
             <h4>Store search history</h4>
             <label className="toggle">
-              <input className="toggle-checkbox" type="checkbox" />
+              <input
+                className="toggle-checkbox"
+                type="checkbox"
+                checked={settings.isSearchHistoryEnabled}
+                onChange={e => this._toggleSettings("isSearchHistoryEnabled")}
+              />
               <div className="toggle-switch"></div>
               <span className="toggle-label"></span>
             </label>
@@ -81,4 +125,19 @@ class SettingsPannel extends Component {
   }
 }
 
-export default SettingsPannel;
+const mapStateToProps = state => {
+  return {
+    settingsData: state.settingsData
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateSettings: settings => dispatch(updateSettings(settings))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SettingsPannel);
