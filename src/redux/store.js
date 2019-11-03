@@ -13,8 +13,7 @@ const persistConfig = {
     key: 'root',
     storage,
     keyPrefix: "",
-    stateReconciler: hardSet,
-    blacklist: []
+    stateReconciler: hardSet
 }
 
 const pReducer = persistReducer(persistConfig, rootReducer);
