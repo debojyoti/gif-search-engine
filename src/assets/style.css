@@ -498,3 +498,8 @@
             -o-transition: height 0.5s linear;
                transition: height 0.5s linear;
   }
+
+  #header-wrapper {
+    z-index: 99;
+    position: fixed;
+  }
