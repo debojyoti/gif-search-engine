@@ -4,30 +4,47 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { showToast } from "../helper-methods/index";
 import SearchInProgress from "./search-in-progress";
 import InfiniteScroll from 'react-infinite-scroller';
+import { connect } from 'react-redux';
+import { updateSettings } from "../redux/actions/settings-data";
 
 class GridResultViewer extends Component {
   state = {};
 
+  _toggleAutoPlay = () => {
+    const { settingsData } = this.props;
+    this.props.updateSettings({ ...settingsData, isAutoPlayEnabled: !settingsData.isAutoPlayEnabled });
+  }
+
   _showCopySuccessMessage = () => {
-    console.log("1 :", 1);
     showToast("Copied to your clipboard!", "success");
   };
 
   render() {
-    const { gifs, pagination, canLoadMore, loadMore } = this.props;
-    console.log('gifs :', gifs);
+    const { gifs, pagination, canLoadMore, loadMore, settingsData } = this.props;
     return (
       <React.Fragment>
         <div id="result-grid-wrapper">
           {/* <SearchInProgress /> */}
           <div id="results-wrapper" className="fColumn aIC jCC">
-            <div id="result-meta-data-wrapper" className="fRow aIC jCS">
+            <div id="result-meta-data-wrapper" className="fRow aIC jCSB">
               <h5>
                 GIFs found:{" "}
                 {pagination && pagination.total_count
                   ? pagination.total_count
                   : 0}
               </h5>
+              <div>
+                Autoplay &nbsp; <label className="toggle" style={{zIndex:9}}>
+              <input
+                className="toggle-checkbox"
+                type="checkbox"
+                checked={settingsData.isAutoPlayEnabled}
+                onChange={e => this._toggleAutoPlay()}
+              />
+              <div className="toggle-switch"></div>
+              <span className="toggle-label"></span>
+            </label> 
+              </div>
             </div>
 
             <InfiniteScroll
@@ -44,7 +61,7 @@ class GridResultViewer extends Component {
                         <div
                           className="gif-thumbnail"
                           style={{
-                            backgroundImage: `url(${gif.images.preview_gif.url})`
+                            backgroundImage: settingsData.isAutoPlayEnabled? `url(${gif.images.downsized.url})`: `url(${gif.images.downsized_still.url})`
                           }}
                         ></div>
                         <div className="gif-quick-actions fRow aIC jCSB">
@@ -99,4 +116,20 @@ class GridResultViewer extends Component {
   }
 }
 
-export default GridResultViewer;
+
+const mapStateToProps = state => {
+  return {
+    settingsData: state.settingsData
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    updateSettings: settings => dispatch(updateSettings(settings))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GridResultViewer);

@@ -3,7 +3,8 @@ import { UPDATE_SETTINGS } from "../actions";
 const defaultSettings = {
   isDarkModeEnabled: false,
   isAutomaticThemeUpdateEnabled: false,
-  isSearchHistoryEnabled: true
+  isSearchHistoryEnabled: true,
+  isAutoPlayEnabled: true
 };
 
 export const settingsDataReducer = (
