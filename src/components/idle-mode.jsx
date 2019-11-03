@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class IdlePage extends Component {
+class IdleMode extends Component {
   state = {};
 
   render() {
@@ -19,4 +19,4 @@ class IdlePage extends Component {
   }
 }
 
-export default IdlePage;
+export default IdleMode;
