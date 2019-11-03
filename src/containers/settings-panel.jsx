@@ -8,18 +8,18 @@ class SettingsPannel extends Component {
 
   componentWillMount() {
     this._toggleSettingsPannel(this.props);
-    document.addEventListener('mousedown', this._handleClick, false);
+    document.addEventListener("mousedown", this._handleClick, false);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mousedown', this._handleClick, false);
+    document.removeEventListener("mousedown", this._handleClick, false);
   }
 
   _handleClick = e => {
-      if (!this.node.contains(e.target)) {
-          this.props.onDismiss();
-      }
-  }
+    if (this.node && !this.node.contains(e.target)) {
+      this.props.onDismiss();
+    }
+  };
 
   componentWillReceiveProps(nextProps) {
     this._toggleSettingsPannel(nextProps);
@@ -45,7 +45,7 @@ class SettingsPannel extends Component {
       <div
         id="bottom-notification-panel"
         className={this._getWrapperClassName()}
-        ref={node => this.node = node}
+        ref={node => (this.node = node)}
       >
         <div className="fColumn" id="settings-area-wrapper">
           <div id="dismiss-wrapper" className="fRow jCE aIC">
