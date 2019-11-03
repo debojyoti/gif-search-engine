@@ -22,7 +22,7 @@ const structureQueryParams = params => {
 
 export const makeGetRequest = async (
   url,
-  attachToken = false,
+  attachAPIKey = false,
   params = null,
   additionalHeaderParams
 ) => {
@@ -34,14 +34,10 @@ export const makeGetRequest = async (
     Accept: "application/json",
     "Content-Type": "application/json"
   };
-  if (attachToken) {
-    try {
-      const authToken = await getToken();
-      if (authToken) {
-        headers["Authorization"] = "Bearer " + authToken;
-      }
-    } catch (e) {
-      console.log(e);
+  if (attachAPIKey) {
+    const api_key = getToken();
+    if (api_key) {
+      headers["api_key"] = api_key;
     }
   }
   if (additionalHeaderParams && Object.keys(additionalHeaderParams).length) {
@@ -83,7 +79,7 @@ export const makeGetRequest = async (
 
 export const makePostRequest = async (
   url,
-  attachToken = false,
+  attachAPIKey = false,
   params = {},
   additionalHeaderParams
 ) => {
@@ -91,14 +87,10 @@ export const makePostRequest = async (
     Accept: "application/json",
     "Content-Type": "application/json"
   };
-  if (attachToken) {
-    try {
-      const authToken = await getToken();
-      if (authToken) {
-        headers["Authorization"] = "Bearer " + authToken;
-      }
-    } catch (e) {
-      console.log("Error fetching auth token: ", e);
+  if (attachAPIKey) {
+    const api_key = getToken();
+    if (api_key) {
+      headers["api_key"] = api_key;
     }
   }
   if (additionalHeaderParams && Object.keys(additionalHeaderParams).length) {
@@ -148,19 +140,15 @@ export const makePostRequest = async (
   });
 };
 
-export const makePutRequest = async (url, attachToken = false, params = {}, additionalHeaderParams) => {
+export const makePutRequest = async (url, attachAPIKey = false, params = {}, additionalHeaderParams) => {
   let headers = {
     Accept: "application/json",
     "Content-Type": "application/json"
   };
-  if (attachToken) {
-    try {
-      const authToken = await getToken();
-      if (authToken) {
-        headers["Authorization"] = "Bearer " + authToken;
-      }
-    } catch (e) {
-      console.log("Error fetching auth token: ", e);
+  if (attachAPIKey) {
+    const api_key = getToken();
+    if (api_key) {
+      headers["api_key"] = api_key;
     }
   }
   if (additionalHeaderParams && Object.keys(additionalHeaderParams).length) {
@@ -212,7 +200,7 @@ export const makePutRequest = async (url, attachToken = false, params = {}, addi
 
 export const makeDeleteRequest = async (
   url,
-  attachToken = false,
+  attachAPIKey = false,
   params = {},
   additionalHeaderParams
 ) => {
@@ -220,14 +208,10 @@ export const makeDeleteRequest = async (
     Accept: "application/json",
     "Content-Type": "application/json"
   };
-  if (attachToken) {
-    try {
-      const authToken = await getToken();
-      if (authToken) {
-        headers["Authorization"] = "Bearer " + authToken;
-      }
-    } catch (e) {
-      console.log("Error fetching auth token: ", e);
+  if (attachAPIKey) {
+    const api_key = getToken();
+    if (api_key) {
+      headers["api_key"] = api_key;
     }
   }
   if (additionalHeaderParams && Object.keys(additionalHeaderParams).length) {
@@ -239,62 +223,6 @@ export const makeDeleteRequest = async (
         method: "DELETE",
         headers: headers,
         body: JSON.stringify(params)
-      })
-        .then(
-          async res => {
-            handleErrorIfAvailable(res);
-            if (res.status.toString()[0] !== "2") {
-              try {
-                const parsedBody = await res.json();
-                reject({ status: res.status, body: parsedBody });
-                return;
-              } catch (err) {
-                reject({ status: res.status, body: null });
-                return;
-              }
-            }
-            return res.json();
-          },
-          error => {
-            reject(error);
-          }
-        )
-        .then(
-          jsonResponse => {
-            resolve(jsonResponse);
-          },
-          error => {
-            reject(error);
-          }
-        )
-        .catch(error => {
-          reject(error);
-        });
-    } catch (e) {
-      console.log(e);
-      reject();
-    }
-  });
-};
-
-export const uploadFile = async (url, attachToken = false, formData) => {
-  let headers = {};
-  if (attachToken) {
-    try {
-      const authToken = await getToken();
-      if (authToken) {
-        headers["Authorization"] = "Bearer " + authToken;
-      }
-    } catch (e) {
-      console.log("Error fetching auth token: ", e);
-    }
-  }
-  return new Promise((resolve, reject) => {
-    try {
-      fetch(url, {
-        method: "POST",
-        headers: headers,
-        body: formData
       })
         .then(
           async res => {
