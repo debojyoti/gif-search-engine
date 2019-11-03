@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import ExpandedGifViewer from "./expanded-gif-viewer";
+import SearchInProgress from "./search-in-progress";
 
 class GridResultViewer extends Component {
   state = {};
+
   render() {
     return (
       <React.Fragment>
         <div id="result-grid-wrapper">
-          <div id="loading" className="fColumn jCC aIC dnone">
-            <div id="loading-animation"></div>
-            <h4>Loading</h4>
-          </div>
+          <SearchInProgress />
           <div id="results-wrapper" className="fColumn aIC jCC">
             <div id="result-meta-data-wrapper" className="fRow aIC jCS">
               <h5>GIFs found: 12310</h5>
