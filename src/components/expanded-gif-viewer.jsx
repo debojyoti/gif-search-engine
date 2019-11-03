@@ -77,7 +77,6 @@ class ExpandedGifViewer extends Component {
   render() {
     const { isVisible, gif } = this.props;
     const { isAutoPlayEnabled } = this.state;
-    console.log("isAutoPlayEnabled :", isAutoPlayEnabled);
     return (
       <div
         id="gif-expander-wrapper"
