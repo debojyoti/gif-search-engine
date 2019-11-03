@@ -3,7 +3,6 @@ import { UPDATE_SETTINGS } from "../actions";
 const defaultSettings = {
   isDarkModeEnabled: false,
   isAutomaticThemeUpdateEnabled: false,
-  isSearchHistoryEnabled: true,
   isAutoPlayEnabled: true
 };
 

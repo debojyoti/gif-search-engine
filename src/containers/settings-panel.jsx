@@ -119,13 +119,13 @@ class SettingsPannel extends Component {
             </label>
           </div>
           <div id="search-history-switch-wrapper" className="fRow jCSB aIC">
-            <h4>Store search history</h4>
+            <h4>Autoplay Gifs</h4>
             <label className="toggle">
               <input
                 className="toggle-checkbox"
                 type="checkbox"
-                checked={settings.isSearchHistoryEnabled}
-                onChange={e => this._toggleSettings("isSearchHistoryEnabled")}
+                checked={settings.isAutoPlayEnabled}
+                onChange={e => this._toggleSettings("isAutoPlayEnabled")}
               />
               <div className="toggle-switch"></div>
               <span className="toggle-label"></span>
