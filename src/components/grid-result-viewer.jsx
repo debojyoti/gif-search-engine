@@ -1,14 +1,19 @@
 import React, { Component } from "react";
 import ExpandedGifViewer from "./expanded-gif-viewer";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { showToast } from "../helper-methods/index";
+import { showToast, deepClone } from "../helper-methods/index";
 import SearchInProgress from "./search-in-progress";
 import InfiniteScroll from "react-infinite-scroller";
 import { connect } from "react-redux";
 import { updateSettings } from "../redux/actions/settings-data";
 
 class GridResultViewer extends Component {
-  state = {};
+  state = {
+    expandedViewer: {
+      isVisible: false,
+      selectedGif: null
+    }
+  };
 
   _toggleAutoPlay = () => {
     const { settingsData } = this.props;
@@ -34,6 +39,20 @@ class GridResultViewer extends Component {
     }
   };
 
+  _showGifExpandedView = gif => {
+    const { expandedViewer } = deepClone(this.state);
+    expandedViewer.gif = gif;
+    expandedViewer.isVisible = true;
+    this.setState({ expandedViewer });
+  };
+
+  _hideExpandedView = () => {
+    const { expandedViewer } = deepClone(this.state);
+    expandedViewer.gif = null;
+    expandedViewer.isVisible = false;
+    this.setState({ expandedViewer });
+  };
+
   render() {
     const {
       gifs,
@@ -43,6 +62,7 @@ class GridResultViewer extends Component {
       settingsData,
       isLoaderActive
     } = this.props;
+    const { expandedViewer } = this.state;
     return (
       <React.Fragment>
         <div id="result-grid-wrapper">
@@ -82,6 +102,7 @@ class GridResultViewer extends Component {
                     <div className="gif-result" key={gifIndex}>
                       <div
                         className="gif-thumbnail"
+                        onClick={() => this._showGifExpandedView(gif)}
                         style={{
                           backgroundImage: settingsData.isAutoPlayEnabled
                             ? `url(${gif.images.downsized.url})`
@@ -140,7 +161,12 @@ class GridResultViewer extends Component {
           </div>
         </div>
 
-        <ExpandedGifViewer />
+        <ExpandedGifViewer
+          isVisible={expandedViewer.isVisible}
+          gif={expandedViewer.gif}
+          onDismiss={this._hideExpandedView}
+          isAutoPlayEnabled={settingsData.isAutoPlayEnabled}
+        />
       </React.Fragment>
     );
   }

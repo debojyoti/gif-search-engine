@@ -522,3 +522,38 @@
         background-size: contain;
         background-position: center;
         background-repeat: no-repeat; }
+
+        .gif-viewer-close {
+          height: 0px!important;
+          -webkit-transition: height 0.5s linear;
+             -moz-transition: height 0.5s linear;
+              -ms-transition: height 0.5s linear;
+               -o-transition: height 0.5s linear;
+                  transition: height 0.5s linear;
+      }
+      
+      .gif-viewer-open {
+           height: 450px!important;
+           -webkit-transition: height 0.5s linear;
+              -moz-transition: height 0.5s linear;
+               -ms-transition: height 0.5s linear;
+                -o-transition: height 0.5s linear;
+                   transition: height 0.5s linear;
+      }
+
+      #gif-expander-wrapper {
+        position: fixed;
+        width: 100vw;
+        height: 440px;
+        z-index: 9999;
+        bottom: 0px;
+        background-color: #2e2e2e; }
+        @media screen and (max-width: 940px) {
+          .gif-viewer-open {
+            height: 90vh!important;
+            -webkit-transition: height 0.5s linear;
+               -moz-transition: height 0.5s linear;
+                -ms-transition: height 0.5s linear;
+                 -o-transition: height 0.5s linear;
+                    transition: height 0.5s linear;
+       }}
