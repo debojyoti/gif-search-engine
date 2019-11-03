@@ -1,0 +1,559 @@
+.hide-on-small {
+  display: block; }
+  @media screen and (max-width: 768px) {
+    .hide-on-small {
+      display: none; } }
+
+.hide-on-medium {
+  display: block; }
+  @media screen and (max-width: 940px) {
+    .hide-on-medium {
+      display: none !important; } }
+
+.visible-on-small {
+  display: none; }
+  @media screen and (max-width: 768px) {
+    .visible-on-small {
+      display: block; } }
+
+.dnone {
+  display: none !important; }
+
+body {
+  padding: 0px;
+  margin: 0px;
+  font-family: Roboto,"Helvetica Neue",sans-serif; }
+
+* {
+  transition: 0.3s !important; }
+
+#app-wrapper {
+  width: 100%; }
+
+.fRow {
+  display: flex;
+  flex-direction: row; }
+
+.fColumn {
+  display: flex;
+  flex-direction: column; }
+
+.jCC {
+  justify-content: center; }
+
+.jCSB {
+  justify-content: space-between; }
+
+.jCC {
+  justify-content: center; }
+
+.jCE {
+  justify-content: flex-end; }
+
+.jCS {
+  justify-content: flex-start; }
+
+.aIC {
+  align-items: center; }
+
+.fWW {
+  flex-wrap: wrap; }
+
+#light-theme {
+  min-height: 100vh; }
+  #light-theme #header {
+    background-color: white; }
+    #light-theme #header #left-part #gifted-logo-wrapper {
+      background-image: url("./images/gifted_logo.gif");
+      background-size: cover;
+      width: 50px;
+      height: 50px; }
+    #light-theme #header #right-part #giphy-logo-wrapper {
+      background-image: url("./images/ezgif-2-5adc248e0993.gif");
+      background-size: contain;
+      background-repeat: no-repeat;
+      width: 40px;
+      height: 40px; }
+    #light-theme #header #right-part #settings {
+      border: 1px solid #a8a8a8;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.25);
+      background-color: black;
+      color: white; }
+    #light-theme #header #right-part #settings:hover {
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25); }
+    #light-theme #header #middle-part #search-wrapper {
+      background-color: rgba(223, 223, 223, 0.87);
+      box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.05); }
+      #light-theme #header #middle-part #search-wrapper input {
+        background-color: rgba(223, 223, 223, 0); }
+    #light-theme #header #middle-part #search-wrapper:hover, #light-theme #header #middle-part #search-wrapper:active {
+      background-color: rgba(214, 214, 214, 0.397); }
+  #light-theme #bottom-notification-panel {
+    color: white;
+    box-shadow: 0px -5px 20px rgba(218, 218, 218, 0.12);
+    background-color: black; }
+    #light-theme #bottom-notification-panel #settings-area-wrapper #dismiss-wrapper button {
+      background-color: white;
+      color: black; }
+    #light-theme #bottom-notification-panel #settings-area-wrapper #dismiss-wrapper button:hover {
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0); }
+  #light-theme #app-body #idle-mode {
+    width: 100%;
+    color: #909090 !important; }
+    #light-theme #app-body #idle-mode #landing-bot {
+      background-image: url("./images/landing-bot-b&w.gif"); }
+  #light-theme #app-body #loading-animation {
+    background-image: url("./images/searching-light.gif"); }
+  #light-theme #app-body #gif-result-grid .gif-result {
+    background-color: #e7e7e7; }
+    #light-theme #app-body #gif-result-grid .gif-result .quick-action {
+      color: #4e4e4e !important; }
+
+#dark-theme {
+  min-height: 100vh;
+  background-color: black;
+  color: #d4d4d4; }
+  #dark-theme #header {
+    background-color: black;
+    box-shadow: 0px 2px 3px black; }
+    #dark-theme #header #left-part #gifted-logo-wrapper {
+      background-image: url("./images/gifted-inverese.gif");
+      background-size: cover;
+      width: 50px;
+      height: 50px; }
+    #dark-theme #header #left-part h3 {
+      color: white; }
+    #dark-theme #header #right-part #giphy-logo-wrapper {
+      background-image: url("./images/giphy-invereted.gif");
+      background-size: contain;
+      background-repeat: no-repeat;
+      width: 40px;
+      height: 40px; }
+    #dark-theme #header #right-part h6 {
+      color: white; }
+    #dark-theme #header #right-part #settings {
+      border: 1px solid white;
+      box-shadow: 5px 5px 15px rgba(228, 228, 228, 0.25);
+      background-color: white;
+      color: black; }
+    #dark-theme #header #right-part #settings:hover {
+      box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25); }
+    #dark-theme #header #middle-part {
+      color: black; }
+      #dark-theme #header #middle-part #search-wrapper {
+        background-color: rgba(236, 236, 236, 0.849);
+        box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.05); }
+        #dark-theme #header #middle-part #search-wrapper input {
+          background-color: rgba(223, 223, 223, 0); }
+      #dark-theme #header #middle-part #search-wrapper:hover, #dark-theme #header #middle-part #search-wrapper:active {
+        background-color: rgba(223, 223, 223, 0.87); }
+  #dark-theme #bottom-notification-panel {
+    box-shadow: 0px -5px 20px rgba(218, 218, 218, 0.12);
+    background-color: #1b1b1b; }
+    #dark-theme #bottom-notification-panel #settings-area-wrapper #dismiss-wrapper button {
+      background-color: white;
+      color: black; }
+    #dark-theme #bottom-notification-panel #settings-area-wrapper #dismiss-wrapper button:hover {
+      box-shadow: 5px 5px 10px rgba(0, 0, 0, 0); }
+  #dark-theme #app-body {
+    background-color: black; }
+    #dark-theme #app-body #idle-mode {
+      width: 100%;
+      color: white; }
+      #dark-theme #app-body #idle-mode #landing-bot {
+        background-image: url("./images/landing-bot-inverted.gif"); }
+    #dark-theme #app-body #loading #loading-animation {
+      background-image: url("./images/searching-dark.gif"); }
+    #dark-theme #app-body #gif-result-grid .gif-result {
+      background-color: #111111; }
+      #dark-theme #app-body #gif-result-grid .gif-result .quick-action {
+        color: #e2e2e2 !important; }
+
+#header {
+  width: 95%;
+  position: fixed;
+  padding: 0px 10px 20px 40px; }
+  @media screen and (max-width: 940px) {
+    #header {
+      padding: 0px 20px 20px 20px; } }
+  #header #left-part {
+    order: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+    #header #left-part #gifted-logo {
+      height: 55px; }
+    #header #left-part h3 {
+      padding: 25px 0px 0px 10px; }
+  #header #right-part {
+    order: 3;
+    padding-top: 20px; }
+    #header #right-part h6 {
+      padding: 10px 10px 0px 10px; }
+    #header #right-part #giphy-logo {
+      padding-top: 10px;
+      height: 40px; }
+      @media screen and (max-width: 940px) {
+        #header #right-part #giphy-logo {
+          height: 30px; } }
+    #header #right-part #settings {
+      border-radius: 60px;
+      margin-top: 10px;
+      padding-right: 8px;
+      font-weight: 600;
+      margin-right: 15px;
+      padding-left: 12px;
+      height: 30px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: 0.1s !important; }
+      @media screen and (max-width: 940px) {
+        #header #right-part #settings {
+          padding-left: 8px; } }
+      #header #right-part #settings i {
+        padding-left: 15px;
+        padding-top: 2px;
+        font-size: 19px; }
+        @media screen and (max-width: 940px) {
+          #header #right-part #settings i {
+            padding-left: 0px; } }
+      @media screen and (max-width: 940px) {
+        #header #right-part #settings p {
+          display: none; } }
+  #header #middle-part {
+    order: 2;
+    padding-top: 40px;
+    padding-bottom: 10px; }
+    @media screen and (max-width: 1024px) {
+      #header #middle-part {
+        order: 4;
+        padding-top: 20px; } }
+    #header #middle-part #search-wrapper {
+      width: 600px;
+      height: 45px;
+      border-radius: 60px; }
+      @media screen and (max-width: 1024px) {
+        #header #middle-part #search-wrapper {
+          width: 90vw; } }
+      #header #middle-part #search-wrapper input {
+        outline: none;
+        width: 88%;
+        border: none; }
+    #header #middle-part span {
+      cursor: pointer; }
+
+#bottom-notification-panel {
+  position: fixed;
+  width: 100vw;
+  height: 350px;
+  z-index: 9999;
+  bottom: 0px; }
+  #bottom-notification-panel #settings-area-wrapper {
+    width: 40%;
+    height: 100%;
+    padding-top: 20px; }
+    @media screen and (max-width: 940px) {
+      #bottom-notification-panel #settings-area-wrapper {
+        width: 80%; } }
+    #bottom-notification-panel #settings-area-wrapper #dismiss-wrapper button {
+      border: none;
+      width: 100px;
+      height: 40px;
+      cursor: pointer; }
+    #bottom-notification-panel #settings-area-wrapper #theme-switch-wrapper {
+      margin-top: 50px; }
+
+#gif-expander-wrapper {
+  position: fixed;
+  width: 100vw;
+  height: 440px;
+  z-index: 9999;
+  bottom: 0px;
+  background-color: #2e2e2e; }
+  @media screen and (max-width: 940px) {
+    #gif-expander-wrapper {
+      height: 90vh; } }
+  #gif-expander-wrapper #gif-details-wrapper {
+    width: 80%;
+    height: 100%;
+    padding-top: 20px; }
+    @media screen and (max-width: 940px) {
+      #gif-expander-wrapper #gif-details-wrapper {
+        width: 80%; } }
+    #gif-expander-wrapper #gif-details-wrapper #expander-dismiss-wrapper button {
+      border: none;
+      width: 100px;
+      height: 40px;
+      background-color: #ffffff;
+      color: #181818;
+      cursor: pointer; }
+    #gif-expander-wrapper #gif-details-wrapper #gif-wrapper {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center; }
+      #gif-expander-wrapper #gif-details-wrapper #gif-wrapper img {
+        border-radius: 50px;
+        max-height: 350px; }
+        @media screen and (max-width: 940px) {
+          #gif-expander-wrapper #gif-details-wrapper #gif-wrapper img {
+            margin-top: 100px;
+            width: 70vw;
+            border-radius: 30px; } }
+      @media screen and (max-width: 940px) {
+        #gif-expander-wrapper #gif-details-wrapper #gif-wrapper {
+          flex-direction: column;
+          overflow: scroll; } }
+      #gif-expander-wrapper #gif-details-wrapper #gif-wrapper #gif-full-action-list {
+        padding-left: 30px;
+        padding-top: 60px;
+        height: 90%;
+        width: 40%; }
+        @media screen and (max-width: 940px) {
+          #gif-expander-wrapper #gif-details-wrapper #gif-wrapper #gif-full-action-list {
+            width: 80%;
+            padding-bottom: 30px; } }
+        #gif-expander-wrapper #gif-details-wrapper #gif-wrapper #gif-full-action-list #gif-name-section #play-pause {
+          color: white;
+          border: 2px solid white;
+          border-radius: 50px;
+          width: 40px;
+          height: 40px;
+          cursor: pointer; }
+        #gif-expander-wrapper #gif-details-wrapper #gif-wrapper #gif-full-action-list #gif-name-section p {
+          padding-top: 2px;
+          padding-left: 20px;
+          color: white; }
+        #gif-expander-wrapper #gif-details-wrapper #gif-wrapper #gif-full-action-list #gif-all-links {
+          margin-top: 30px;
+          color: white;
+          margin-left: 10px; }
+          #gif-expander-wrapper #gif-details-wrapper #gif-wrapper #gif-full-action-list #gif-all-links .social-link {
+            font-size: 18px;
+            margin-right: 25px;
+            cursor: pointer; }
+        #gif-expander-wrapper #gif-details-wrapper #gif-wrapper #gif-full-action-list #link-message {
+          color: lime;
+          font-size: 12px;
+          margin: 15px 0px 15px 10px; }
+        #gif-expander-wrapper #gif-details-wrapper #gif-wrapper #gif-full-action-list #embed-code p {
+          color: white; }
+        #gif-expander-wrapper #gif-details-wrapper #gif-wrapper #gif-full-action-list #embed-code textarea {
+          width: 100%;
+          resize: none;
+          cursor: text;
+          background-color: #000000;
+          color: white;
+          border: none;
+          font-size: 12px; }
+
+#app-body {
+  padding-top: 20vh; }
+  @media screen and (max-width: 940px) {
+    #app-body {
+      padding-top: 25vh; } }
+  @media screen and (max-height: 450px) {
+    #app-body {
+      padding-top: 55vh; } }
+  #app-body #idle-mode {
+    margin-top: 120px;
+    height: 100%;
+    width: 100%; }
+    #app-body #idle-mode #landing-bot {
+      background-image: url("./images/landing-bot-b&w.gif");
+      height: 150px;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      width: 100%; }
+    #app-body #idle-mode #featured {
+      color: #ff9d00;
+      font-size: 18px;
+      text-decoration: underline;
+      cursor: pointer; }
+  #app-body #result-mode {
+    margin-top: 20px; }
+  #app-body #loading {
+    margin-top: 110px; }
+    #app-body #loading #loading-animation {
+      width: 300px;
+      height: 100px;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat; }
+  #app-body #result-grid-wrapper {
+    width: 90%; }
+  #app-body #results-wrapper {
+    width: 100%; }
+    #app-body #results-wrapper #result-meta-data-wrapper {
+      flex: 1;
+      width: 100%; }
+    #app-body #results-wrapper #gif-result-grid {
+      flex-wrap: wrap; }
+      #app-body #results-wrapper #gif-result-grid .gif-result {
+        margin: 15px;
+        width: 250px;
+        height: 320px;
+        border-radius: 8px; }
+        @media screen and (max-width: 940px) {
+          #app-body #results-wrapper #gif-result-grid .gif-result {
+            height: 390px;
+            width: 300px; } }
+        #app-body #results-wrapper #gif-result-grid .gif-result .gif-thumbnail {
+          background-image: url("https://media.giphy.com/media/AYKv7lXcZSJig/giphy.gif");
+          width: 250px;
+          height: 260px;
+          cursor: pointer;
+          border-radius: 8px;
+          background-size: cover;
+          background-position: center; }
+          @media screen and (max-width: 940px) {
+            #app-body #results-wrapper #gif-result-grid .gif-result .gif-thumbnail {
+              height: 330px;
+              width: 300px; } }
+        #app-body #results-wrapper #gif-result-grid .gif-result .social-links {
+          margin-left: 10px; }
+        #app-body #results-wrapper #gif-result-grid .gif-result .quick-action {
+          cursor: pointer;
+          margin-top: 10px;
+          border-radius: 24px;
+          width: 20px;
+          margin-right: 15px; }
+          #app-body #results-wrapper #gif-result-grid .gif-result .quick-action .text {
+            font-size: 10px; }
+          #app-body #results-wrapper #gif-result-grid .gif-result .quick-action .icon {
+            padding-left: 5px;
+            font-size: 12px; }
+  #app-body #footer {
+    margin-top: 60px;
+    height: 50px;
+    width: 98vw;
+    font-size: 13px; }
+
+.toggle {
+  cursor: pointer;
+  display: inline-block;
+  outline: none; }
+
+.toggle-switch {
+  display: inline-block;
+  background: #ccc;
+  border-radius: 16px;
+  width: 48px;
+  height: 24px;
+  position: relative;
+  vertical-align: middle;
+  transition: background 0.25s; }
+
+.toggle-switch:before, .toggle-switch:after {
+  content: ""; }
+
+.toggle-switch:before {
+  display: block;
+  background: linear-gradient(to bottom, #fff 0%, #eee 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25);
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  transition: left 0.25s; }
+
+.toggle:hover .toggle-switch:before {
+  background: linear-gradient(to bottom, #fff 0%, #fff 100%);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5); }
+
+.toggle-checkbox:checked + .toggle-switch {
+  background: #000000; }
+
+.toggle-checkbox:checked + .toggle-switch:before {
+  left: 30px; }
+
+.toggle-checkbox {
+  position: absolute;
+  visibility: hidden; }
+
+.toggle-label {
+  margin-left: 5px;
+  position: relative;
+  top: 2px; }
+
+  .settings-close {
+    height: 0px!important;
+    -webkit-transition: height 0.5s linear;
+       -moz-transition: height 0.5s linear;
+        -ms-transition: height 0.5s linear;
+         -o-transition: height 0.5s linear;
+            transition: height 0.5s linear;
+}
+
+.settings-open {
+     height: 350px!important;
+     -webkit-transition: height 0.5s linear;
+        -moz-transition: height 0.5s linear;
+         -ms-transition: height 0.5s linear;
+          -o-transition: height 0.5s linear;
+             transition: height 0.5s linear;
+}
+
+#header-wrapper {
+  z-index: 99;
+  position: fixed;
+}
+
+.gif-quick-actions > p {
+  font-size: 12px;
+  margin: 0px;
+  padding: 8px 15px 0px 15px;
+}
+
+#light-theme #app-body #noresults-animation {
+  background-image: url("./images/no-results-light.gif"); }
+
+  #dark-theme #app-body #noresults-animation {
+    background-image: url("./images/no-results-dark.gif"); }
+
+    #app-body #loading #noresults-animation {
+      width: 300px;
+      height: 100px;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat; }
+
+      .gif-viewer-close {
+        height: 0px!important;
+        -webkit-transition: height 0.5s linear;
+           -moz-transition: height 0.5s linear;
+            -ms-transition: height 0.5s linear;
+             -o-transition: height 0.5s linear;
+                transition: height 0.5s linear;
+    }
+    
+    .gif-viewer-open {
+         height: 450px!important;
+         -webkit-transition: height 0.5s linear;
+            -moz-transition: height 0.5s linear;
+             -ms-transition: height 0.5s linear;
+              -o-transition: height 0.5s linear;
+                 transition: height 0.5s linear;
+    }
+
+    #gif-expander-wrapper {
+      position: fixed;
+      width: 100vw;
+      height: 440px;
+      z-index: 9999;
+      bottom: 0px;
+      background-color: #2e2e2e; }
+      @media screen and (max-width: 940px) {
+        .gif-viewer-open {
+          height: 90vh!important;
+          -webkit-transition: height 0.5s linear;
+             -moz-transition: height 0.5s linear;
+              -ms-transition: height 0.5s linear;
+               -o-transition: height 0.5s linear;
+                  transition: height 0.5s linear;
+     }}
