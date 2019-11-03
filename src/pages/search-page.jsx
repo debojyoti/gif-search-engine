@@ -8,10 +8,10 @@ class SearchPage extends Component {
       <div id="result-mode" className="fColumn jCC aIC">
         <div id="result-header" className="fRow jCC aIC">
           <img
-            src="images/featured-star-transparent.gif"
+            src="runtime_assets/images/random-gifs.gif"
             alt=""
             id="featured-icon"
-            style="width: 70px"
+            style={{width: 40, marginRight: 20}}
           />
           <h3>Searched gifs</h3>
         </div>
