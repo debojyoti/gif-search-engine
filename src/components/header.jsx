@@ -2,6 +2,19 @@ import React, { Component } from "react";
 
 class Header extends Component {
   state = {};
+
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef();
+  }
+
+  _handleKeyDown = e => {
+    if (e.key === 'Enter' && e.target.value.length) {
+      this.props.newSearchRequest(e.target.value);
+      this.inputRef.current.blur();
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -13,7 +26,7 @@ class Header extends Component {
             </div>
             <div id="middle-part" className="fRow aIC">
               <div id="search-wrapper" className="fRow aIC jCC">
-                <input type="text" placeholder="Search gifs" autoFocus />
+                <input type="text" placeholder="Search gifs" autoFocus onKeyDown={this._handleKeyDown} ref={this.inputRef} />
                 <span>
                   <i className="fa fa-search" aria-hidden="true"></i>
                 </span>
