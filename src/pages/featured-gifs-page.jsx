@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GridResultViewer from '../components/grid-result-viewer';
+import GridResultViewer from '../containers/grid-result-viewer';
 import { deepClone, showToast } from "../helper-methods";
 import { fetchFeaturedGifs } from '../http-calls/index';
 import { GIF_LIMIT_PER_LOAD } from '../config/index';

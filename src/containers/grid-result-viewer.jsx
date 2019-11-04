@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import ExpandedGifViewer from "./expanded-gif-viewer";
+import ExpandedGifViewer from "../components/expanded-gif-viewer";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { showToast, deepClone } from "../helper-methods/index";
-import SearchInProgress from "./search-in-progress";
+import SearchInProgress from "../components/search-in-progress";
 import InfiniteScroll from "react-infinite-scroller";
 import { connect } from "react-redux";
 import { updateSettings } from "../redux/actions/settings-data";
