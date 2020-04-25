@@ -10,22 +10,22 @@ class Header extends Component {
     this.inputRef = React.createRef();
   }
 
-  _handleKeyDown = e => {
+  _handleKeyUp = e => {
     this._updateSearchText(e.target.value);
-    if (e.key === 'Enter' && e.target.value.length) {
+    if (e.key === "Enter" && e.target.value.length) {
       this.props.newSearchRequest(e.target.value);
       this.inputRef.current.blur();
     }
-  }
+  };
 
   _updateSearchText = searchText => {
     this.setState({ searchText });
-  }
+  };
 
   _triggerSearch = () => {
     const { searchText } = this.state;
     this.props.newSearchRequest(searchText);
-  }
+  };
 
   render() {
     const { searchText } = this.state;
@@ -39,7 +39,13 @@ class Header extends Component {
             </div>
             <div id="middle-part" className="fRow aIC">
               <div id="search-wrapper" className="fRow aIC jCC">
-                <input type="text" placeholder="Search gifs" autoFocus onKeyDown={this._handleKeyDown} ref={this.inputRef} />
+                <input
+                  type="text"
+                  placeholder="Search gifs"
+                  autoFocus
+                  onKeyUp={this._handleKeyUp}
+                  ref={this.inputRef}
+                />
                 <span onClick={this._triggerSearch}>
                   <i className="fa fa-search" aria-hidden="true"></i>
                 </span>
