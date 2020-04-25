@@ -27,5 +27,3 @@ yarn start
 9. No 3rd party UI library included (UI development code is available with git logs in a seperate directory)
 
 ![](./project-architecture-design/gifted-architecture.jpg)
-
-![](https://res.cloudinary.com/dqzurhnfk/image/upload/v1572828388/gifted-architecture_lbfgqw.jpg)
