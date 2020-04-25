@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 
 class Header extends Component {
-  state = {};
+  state = {
+    searchText: ""
+  };
 
   constructor(props) {
     super(props);
@@ -9,13 +11,24 @@ class Header extends Component {
   }
 
   _handleKeyDown = e => {
+    this._updateSearchText(e.target.value);
     if (e.key === 'Enter' && e.target.value.length) {
       this.props.newSearchRequest(e.target.value);
       this.inputRef.current.blur();
     }
   }
 
+  _updateSearchText = searchText => {
+    this.setState({ searchText });
+  }
+
+  _triggerSearch = () => {
+    const { searchText } = this.state;
+    this.props.newSearchRequest(searchText);
+  }
+
   render() {
+    const { searchText } = this.state;
     return (
       <React.Fragment>
         <div id="header-wrapper">
@@ -27,7 +40,7 @@ class Header extends Component {
             <div id="middle-part" className="fRow aIC">
               <div id="search-wrapper" className="fRow aIC jCC">
                 <input type="text" placeholder="Search gifs" autoFocus onKeyDown={this._handleKeyDown} ref={this.inputRef} />
-                <span>
+                <span onClick={this._triggerSearch}>
                   <i className="fa fa-search" aria-hidden="true"></i>
                 </span>
               </div>
